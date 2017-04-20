@@ -18,6 +18,7 @@
   "permissions": [
     "activeTab",
     "tabs",
+    "webNavigation",
     "https://ajax.googleapis.com/"
   ]
 }
