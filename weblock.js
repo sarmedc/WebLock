@@ -14,15 +14,17 @@ function addURL(){
   }
 }
 
-function removeURL(idNum){
-  var url = document.getElementById("url"+idNum);
-  console.log(idNum);
+function removeURL(url){
+  // var url = document.getElementById("url"+idNum);
+  var toot = url.parentNode.children;
+  // console.log(toot[0].innerHTML);
   var websites = JSON.parse(localStorage.getItem("websites"));
-  var index = websites.indexOf("tittt");
+  var index = websites.indexOf(toot[0].innerHTML);
   if(index > -1)
     websites.splice(index,1);
 
-  localStorage.setItem("websites", JSON.stringify(websites));  
+  localStorage.setItem("websites", JSON.stringify(websites));   
+  history.go();  
 }
 
 function init(){    
@@ -35,10 +37,7 @@ function init(){
 
     var div = document.getElementById("divTable");
     var table = document.createElement("table");
-    var tr;
-    var td;
-    var span;
-    var button;
+    var tr, td, span, button;
 
     for(var i = 0; i < websites.length; i++){
       tr = document.createElement("tr");
@@ -46,13 +45,16 @@ function init(){
       span = document.createElement("span");
       button = document.createElement("button");
       
-      button.innerHTML = "Remove";
-      button.id = "removeURL"+i;
-      button.className = "removeBtn";      
-      
       span.innerHTML = websites[i];
       span.id = "url"+i;
       span.className = "urls";
+
+      button.innerHTML = "Remove";
+      button.id = "removeURL"+i;
+      button.className = "removeBtn";   
+      button.addEventListener('click', function(){removeURL(this)}, false); 
+      
+      
       //console.log(span.id);
       
       td.append(span);
@@ -63,17 +65,12 @@ function init(){
       table.append(tr);
 
     }
-
     
     div.append(table);
-
-    for(var j = 0 ; j < websites.length; j++)
-      document.getElementById("removeURL"+j).addEventListener('click', function(){removeURL(j)}, false);
 
   }
 
   document.getElementById("addURL").addEventListener('click', addURL);  
-  //document.getElementById("removeURL"+0).addEventListener('click', function(){removeURL(0)}, false);
   
 }
 
