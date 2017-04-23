@@ -14,20 +14,70 @@ function addURL(){
   }
 }
 
-function init(){  
+function removeURL(idNum){
+  var url = document.getElementById("url"+idNum);
+  console.log(idNum);
+  var websites = JSON.parse(localStorage.getItem("websites"));
+  var index = websites.indexOf("tittt");
+  if(index > -1)
+    websites.splice(index,1);
+
+  localStorage.setItem("websites", JSON.stringify(websites));  
+}
+
+function init(){    
   if(!localStorage.getItem("websites")) {        
-    var arr = ["www.nolollygagging.com"];      
+    var arr = [""];      
     localStorage.setItem("websites", JSON.stringify(arr));    
+  }
+  else{
+    var websites = JSON.parse(localStorage.getItem("websites"));
+
+    var div = document.getElementById("divTable");
+    var table = document.createElement("table");
+    var tr;
+    var td;
+    var span;
+    var button;
+
+    for(var i = 0; i < websites.length; i++){
+      tr = document.createElement("tr");
+      td = document.createElement("td");
+      span = document.createElement("span");
+      button = document.createElement("button");
+      
+      button.innerHTML = "Remove";
+      button.id = "removeURL"+i;
+      button.className = "removeBtn";      
+      
+      span.innerHTML = websites[i];
+      span.id = "url"+i;
+      span.className = "urls";
+      //console.log(span.id);
+      
+      td.append(span);
+      td.append(button);
+      
+      tr.append(td);
+      
+      table.append(tr);
+
+    }
+
     
-  }else{
-    // alert(localStorage.getItem("websites"));
+    div.append(table);
+
+    for(var j = 0 ; j < websites.length; j++)
+      document.getElementById("removeURL"+j).addEventListener('click', function(){removeURL(j)}, false);
+
   }
 
   document.getElementById("addURL").addEventListener('click', addURL);  
-  // document.getElementByID("removeURL").addEventListener('click', removeURL, false); 
+  //document.getElementById("removeURL"+0).addEventListener('click', function(){removeURL(0)}, false);
+  
 }
 
 window.onload = function(){   
-     //localStorage.clear();    
-   init();
+  //localStorage.clear();  
+  init();
 };

@@ -1,24 +1,56 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>        
+    <title>Weblock</title>        
     <script src="weblock.js"></script>
+    <style>
+      body{
+        width: 250px;
+      }     
+
+      h3{
+        width: 250px;
+        display: center;
+      }
+
+      #webURL{
+        width: 245px;
+      }
+
+      #addURL{
+        float: right;
+      }
+
+      table{
+        border: 1px black solid;        
+        max-width: 100%;
+        width: 250px;
+      }
+
+      tr:nth-child(even) {background-color: #f2f2f2}
+
+      .urls{
+        display: inline-block;
+        float: left;
+      }
+
+      .removeBtn{
+        display: inline-block;
+        float: right;
+      }
+      
+    </style>
   </head>
   <body>
     <div>
       <h3>Enter a website URL to block:</h3>
       <form>
-        <input type="text" name="websiteName" id="webURL" placeholder="https://website-name.com">
-        <!-- <input type="submit" value="Add" id="addURL"> -->
+        <input type="text" name="websiteName" id="webURL" placeholder="https://website-name.com">        
         <button id="addURL">Add</button>
       </form>
     </div>
-    <div>
-      <table>
-        <tr>
-          <td></td><!-- <input type="submit" value="Remove" id="removeURL"> -->
-        </tr>
-      </table>
+    <br><br>
+    <div id="divTable">
     </div>
   </body>
 </html>
